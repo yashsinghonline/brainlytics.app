@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <meta
+      name="description"
+      content="BrainBolt is a fast, minimal brain-training website with 12 games for memory, speed, logic, focus, and math."
+    />
+    <link rel="icon" href="/favicon.svg?v=hexagon-1" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png?v=hexagon-1" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-icon.png?v=hexagon-1" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/styles.css?v=static-1" />
+    <title>BrainBolt — Train your brain</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#home" aria-label="BrainBolt home">
+          <img src="/brainbolt-icon.svg?v=hexagon-1" alt="" width="38" height="38" />
+          <span>
+            <strong>BrainBolt</strong>
+            <small>Cognitive training</small>
+          </span>
+        </a>
+
+        <button class="menu-button" id="menu-button" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#games">Games</a>
+          <a href="#progress">Progress</a>
+          <a href="#about">How it works</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle color theme">◐</button>
+          <a class="button button-small button-solid" href="/downloads/brainbolt.apk" download="BrainBolt.apk">
+            Download APK
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero wrap" id="home">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="status-dot"></span> 12 games · 5 core skills</p>
+          <h1>Think a little<br />sharper. <em>Every day.</em></h1>
+          <p class="hero-lead">
+            Short, focused games for memory, speed, logic, attention, and mental math.
+            No account. No clutter. Just one useful minute at a time.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-solid" href="#games">Start training <span>→</span></a>
+            <a class="button" href="/downloads/brainbolt.apk" download="BrainBolt.apk">Download Android APK <span>↓</span></a>
+          </div>
+          <ul class="trust-list" aria-label="Product highlights">
+            <li>Works offline</li>
+            <li>Saves on this device</li>
+            <li>Free to play</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="BrainBolt training preview">
+          <div class="visual-grid" aria-hidden="true"></div>
+          <div class="hero-logo-wrap">
+            <img src="/brainbolt-icon.svg?v=hexagon-1" alt="BrainBolt geometric brain mark" width="230" height="230" />
+          </div>
+          <div class="score-float float-top">
+            <span>Brain score</span>
+            <strong id="hero-brain-score">—</strong>
+          </div>
+          <div class="score-float float-bottom">
+            <span>Daily streak</span>
+            <strong><b id="hero-streak">0</b> days</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-strip" aria-label="Today's statistics">
+        <div class="wrap metric-grid">
+          <div><strong id="metric-games">0</strong><span>Games today</span></div>
+          <div><strong id="metric-best">—</strong><span>Best today</span></div>
+          <div><strong id="metric-streak">0</strong><span>Day streak</span></div>
+          <div><strong id="metric-reaction">—</strong><span>Best reaction</span></div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="games">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">Game library</p>
+            <h2>Choose what to train.</h2>
+          </div>
+          <p>Twelve quick challenges. Each one isolates a different part of how you think.</p>
+        </div>
+
+        <div class="daily-card reveal">
+          <div class="daily-copy">
+            <p class="eyebrow">Today’s set · <span id="daily-date"></span></p>
+            <h3 id="daily-title">Three games. One sharper mind.</h3>
+            <p>A balanced session selected for today. Complete the set to keep your streak alive.</p>
+            <button class="button button-solid" id="daily-start" type="button">Begin daily training <span>→</span></button>
+          </div>
+          <div class="daily-games" id="daily-games"></div>
+        </div>
+
+        <div class="filter-bar reveal" role="group" aria-label="Filter games">
+          <button class="filter active" type="button" data-filter="All">All</button>
+          <button class="filter" type="button" data-filter="Memory">Memory</button>
+          <button class="filter" type="button" data-filter="Logic">Logic</button>
+          <button class="filter" type="button" data-filter="Speed">Speed</button>
+          <button class="filter" type="button" data-filter="Math">Math</button>
+          <button class="filter" type="button" data-filter="Focus">Focus</button>
+          <button class="filter" type="button" data-filter="Pattern">Pattern</button>
+        </div>
+        <div class="game-grid" id="game-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="section progress-section" id="progress">
+        <div class="wrap">
+          <div class="section-heading reveal">
+            <div>
+              <p class="eyebrow">Your progress</p>
+              <h2>Small wins, made visible.</h2>
+            </div>
+            <p>Your score is a game metric built from five skill areas—not an IQ or medical assessment.</p>
+          </div>
+
+          <div class="progress-grid reveal">
+            <div class="brain-score-card">
+              <p class="eyebrow light">Overall brain score</p>
+              <strong id="brain-score">—</strong>
+              <span id="brain-rank">Start training</span>
+              <p>Updates after every completed game.</p>
+            </div>
+            <div class="skills-card">
+              <div class="card-label-row"><span>Skill profile</span><span>/ 100</span></div>
+              <div id="skill-bars"></div>
+            </div>
+          </div>
+
+          <div class="records reveal">
+            <div><strong id="record-score">—</strong><span>Highest score</span></div>
+            <div><strong id="record-reaction">—</strong><span>Fastest reaction</span></div>
+            <div><strong id="record-accuracy">—</strong><span>Best accuracy</span></div>
+            <div><strong id="record-level">—</strong><span>Highest level</span></div>
+            <div><strong id="record-streak">0</strong><span>Longest streak</span></div>
+            <div><strong id="record-total">0</strong><span>Games played</span></div>
+          </div>
+
+          <div class="history-card reveal">
+            <div class="card-label-row"><span>Last 7 days</span><span>Points earned</span></div>
+            <div class="chart" id="history-chart" aria-label="Seven day score chart"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="about">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">How it works</p>
+            <h2>Built for one more round.</h2>
+          </div>
+          <p>Open, play, improve. The whole experience is designed to remove friction.</p>
+        </div>
+        <div class="steps reveal">
+          <article><span>01</span><h3>Choose</h3><p>Pick a skill or start the balanced three-game daily set.</p></article>
+          <article><span>02</span><h3>Play</h3><p>Complete a focused challenge in one to five minutes.</p></article>
+          <article><span>03</span><h3>Improve</h3><p>Watch scores, records, streaks, and skill levels grow.</p></article>
+        </div>
+      </section>
+
+      <section class="download-section wrap reveal" id="download">
+        <div class="download-copy">
+          <p class="eyebrow light">BrainBolt for Android</p>
+          <h2>Take your training with you.</h2>
+          <p>Install BrainBolt on Android for a focused, full-screen experience. The browser version remains available with no download required.</p>
+          <div class="download-actions">
+            <a class="button button-light" href="/downloads/brainbolt.apk" download="BrainBolt.apk">Download APK <span>↓</span></a>
+            <a class="text-link" href="#games">Or play in your browser →</a>
+          </div>
+          <small>APK placeholder connected · Replace with the signed release build before publishing</small>
+        </div>
+        <div class="download-specs">
+          <div><strong>Android</strong><span>Platform</span></div>
+          <div><strong>APK</strong><span>Format</span></div>
+          <div><strong>Direct</strong><span>Install</span></div>
+          <div><strong>Pending</strong><span>Release</span></div>
+        </div>
+      </section>
+
+      <section class="settings-section wrap reveal" aria-label="Website settings">
+        <div><p class="eyebrow">Preferences</p><h2>Make it yours.</h2></div>
+        <div class="settings-list">
+          <label><span>Sound effects</span><input id="sound-setting" type="checkbox" checked /><i></i></label>
+          <label><span>Reduced motion</span><input id="motion-setting" type="checkbox" /><i></i></label>
+          <button id="reset-progress" type="button">Reset local progress</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <img src="/brainbolt-icon.svg?v=hexagon-1" alt="" width="30" height="30" />
+          <span><strong>BrainBolt</strong><small>Train one minute at a time.</small></span>
+        </div>
+        <div class="footer-links"><a href="#games">Games</a><a href="#progress">Progress</a><a href="#download">Download</a></div>
+        <p>Progress stays on this device.<br />Brain score is a game metric.</p>
+      </div>
+    </footer>
+
+    <dialog class="game-dialog" id="game-dialog">
+      <div class="dialog-shell">
+        <header class="game-header">
+          <button class="close-game" id="close-game" type="button" aria-label="Close game">×</button>
+          <div><span id="game-kicker">Game</span><strong id="game-name">BrainBolt</strong></div>
+          <div class="game-score"><span>Score</span><strong id="game-score">0</strong></div>
+        </header>
+        <div class="game-status" id="game-status">
+          <span id="game-level">Level 1</span>
+          <div class="timer-track"><i id="timer-bar"></i></div>
+          <span id="game-time">—</span>
+        </div>
+        <div class="game-stage" id="game-stage"></div>
+        <div class="game-toast" id="game-toast" aria-live="assertive"></div>
+      </div>
+    </dialog>
+
+    <script src="/app.js?v=static-1" defer></script>
+  </body>
+</html>
