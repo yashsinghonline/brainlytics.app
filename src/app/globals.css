@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --page: #f2f2f2;
+  --surface: #ffffff;
+  --surface-2: #f7f7f7;
+  --line: #d6d6d6;
+  --text: #0a0a0a;
+  --muted: #8c8c8c;
+  --fill: #0a0a0a;
+  --fill-text: #ffffff;
+}
+
+.dark {
+  --page: #000000;
+  --surface: #0d0d0d;
+  --surface-2: #141414;
+  --line: #262626;
+  --text: #f2f2f2;
+  --muted: #7d7d7d;
+  --fill: #f2f2f2;
+  --fill-text: #0a0a0a;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--page);
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@layer utilities {
+  .page-bg {
+    background: var(--page);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .card-2 {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+  }
+
+  .box-fill {
+    background: var(--fill);
+    color: var(--fill-text);
+    border: 1px solid var(--fill);
+  }
+
+  .box-outline {
+    background: transparent;
+    border: 1px solid var(--text);
+  }
+
+  /* filled boxes always keep inverted text, even when combined with .label */
+  .box-fill.label,
+  .box-fill .label {
+    color: var(--fill-text);
+  }
+
+  .label.label-strong {
+    color: var(--text);
+  }
+
+  .hairline {
+    border-color: var(--line);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .num {
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+
+  .stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--text) 16%, transparent) 0 4px,
+      transparent 4px 8px
+    );
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .safe-bottom {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+  }
+
+  .tap {
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+  .tap:active {
+    transform: scale(0.985);
+    opacity: 0.75;
+  }
+}
+
+/* ---------- site shell ---------- */
+.container-site {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+/* focused game column: full-bleed on phones, a bordered frame on larger screens */
+.game-frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 36rem;
+  margin-inline: auto;
+  min-height: 100dvh;
+}
+
+@media (min-width: 768px) {
+  .container-site {
+    padding-inline: 2rem;
+  }
+  .game-frame {
+    min-height: calc(100dvh - 4rem);
+    margin-block: 2rem;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-pop {
+  animation: pop-in 0.2s ease-out both;
+}
+
+@keyframes shake-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+.animate-shake {
+  animation: shake-x 0.28s ease both;
+}
+
+@keyframes blink-soft {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.animate-blink {
+  animation: blink-soft 1.6s ease-in-out infinite;
+}
+
+@keyframes count-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-count {
+  animation: count-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-slide-in {
+  animation: slide-in 0.22s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
